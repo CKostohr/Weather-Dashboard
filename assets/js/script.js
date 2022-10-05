@@ -1,7 +1,7 @@
-var APIKey = "9cff359740d619b80effc7ca22fd6308";
+let magicBtn = document.getElementById("magicBtn");
+magicBtn.addEventListener("click", getLocation);
 
-var city;
-
-var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
-
-fetch(queryURL)
+function getLocation(event) {
+    event.preventDefault();
+    
+}
