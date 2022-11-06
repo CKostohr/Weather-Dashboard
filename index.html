@@ -15,20 +15,22 @@
           <h1 class="display-2 text-center">Weather Dashboard</h1>
         </div>
     </div>
-    <section class="container m-3">
-        <div class="row">
-            <div class="col-12 col-md-4 border" id="city">
-                <div class="form-group">
-                    <h3 for="citySearch">Get Weather</h3>
-                    <input type="text" class="form-control" id="searchImput">
-                </div>
-                <button type="submit" id="magicBtn" class="btn col-12 btn-success">Submit</button>
-                <h4 class="mt-3 mb-0">Previous Search</h4>
+    <section id="citySearch">
+        <div class="citynum1">
+            <h2>What City Would you Like to View?</h2>
+            <input type="text" placeholder="Enter a City" id="cityInput">
+            <div class="container">
+                <button type="button" class="btn btn-primary" id="searchButton"></button>
             </div>
-            <div class="col-12 col-md-8">
-                <div id="results"></div>
-                <div id="forecast"></div>
-            </div>
+        </div>
+        <div class="citynum2" id="recentSearch"></div>
+    </section>
+    <section id="weatherData">
+        <div id="currentWeather">
+            <h2><span id="c-City"></span> <img id="c-Icon"></h2>
+            <h3>Temperature: <span id="c-Temp"></span>0</h3>
+            <h3>Wind: <span id="c-Wind"></span>MPH</h3>
+            <h3>Humidity: <span id="c-Humidity"></span>%</h3>
         </div>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
