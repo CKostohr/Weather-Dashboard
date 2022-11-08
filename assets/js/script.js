@@ -1,5 +1,5 @@
-const APIKey = '90a5a0fd17c8d2e0dfa9c4cd8c6be0cd'
-let today = moment().format('M/D/YYYY')
+const APIKey = '9cff359740d619b80effc7ca22fd6308'
+const today = moment().format('M/D/YYYY')
 
 let citySearchInput = document.getElementById('cityInput')
 let citySearch = ''
@@ -9,7 +9,9 @@ let sameDayURL = ''
 searchButton.addEventListener('click', function(){
     citySearch = citySearchInput.value
 
-    sameDayURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + citySearch + 'appid=' + APIKey + '&units=imperial'
+    sameDayURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + citySearch + '&appid=' + APIKey + '&units=imperial'
+
+    console.log(citySearch)
 
     let history = JSON.parse(localStorage.getItem('cities'))
     history.push(citySearch)
@@ -26,11 +28,11 @@ function SetWeather() {
     })
     .then(function(dailyWeather) {
 
-        let todayTemp = dailyWeather.main.todayTemp
+        let todayTemp = dailyWeather.main.temp
         let todayWind = dailyWeather.wind.speed
-        let todayHumidity = dailyWeather.main.todayHumidity
-        let todayIconCode = dailyWeather.weather[0].todayIconCode
-        let todayIcon = 'https:openweather.org/img/w/' +todayIconCode + '.png'
+        let todayHumidity = dailyWeather.main.humidity
+        let todayIconCode = dailyWeather.weather[0].icon
+        let todayIcon = 'https://openweathermap.org/img/w/' + todayIconCode + '.png'
     
 
         let chosenCity = document.getElementById('c-City')
@@ -62,38 +64,44 @@ function SetWeather() {
             return response3.json()
         })
         .then(function(fiveDay) {
+            console.log(fiveDay)
 
             let dayOne = moment().add(1, 'd').format('M/D/YYYY')
             let dayOneTemp = fiveDay.list[5].main.todayTemp
-            let dayOneWind = fiveDay.list[5].main.humidity
+            let dayOneWind = fiveDay.list[5].wind.speed
+            let dayOneHumidity = fiveDay.list[5].main.humidity
             let dayOneIconCode = fiveDay.list[5].weather[0].icon
             let dayOneIcon = 'https:openweathermap.org/img/w/' + dayOneIconCode + '.png'
 
-            let dayTwo = moment().add(1, 'd').format('M/D/YYYY')
-            let dayTwoTemp = fiveDay.list[5].main.todayTemp
-            let dayTwoWind = fiveDay.list[5].main.humidity
-            let dayTwoIconCode = fiveDay.list[5].weather[0].icon
+            let dayTwo = moment().add(2, 'd').format('M/D/YYYY')
+            let dayTwoTemp = fiveDay.list[13].main.todayTemp
+            let dayTwoWind = fiveDay.list[13].wind.speed
+            let dayTwoHumidity = fiveDay.list[13].main.humidity
+            let dayTwoIconCode = fiveDay.list[13].weather[0].icon
             let dayTwoIcon = 'https:openweathermap.org/img/w/' + dayTwoIconCode + '.png'
 
-            let dayThree = moment().add(1, 'd').format('M/D/YYYY')
-            let dayThreeTemp = fiveDay.list[5].main.todayTemp
-            let dayThreeWind = fiveDay.list[5].main.humidity
-            let dayThreeIconCode = fiveDay.list[5].weather[0].icon
+            let dayThree = moment().add(3, 'd').format('M/D/YYYY')
+            let dayThreeTemp = fiveDay.list[21].main.todayTemp
+            let dayThreeWind = fiveDay.list[21].wind.speed
+            let dayThreeHumidity = fiveDay.list[21].main.humidity
+            let dayThreeIconCode = fiveDay.list[21].weather[0].icon
             let dayThreeIcon = 'https:openweathermap.org/img/w/' + dayThreeIconCode + '.png'
 
-            let dayFour = moment().add(1, 'd').format('M/D/YYYY')
-            let dayFourTemp = fiveDay.list[5].main.todayTemp
-            let dayFourWind = fiveDay.list[5].main.humidity
-            let dayFourIconCode = fiveDay.list[5].weather[0].icon
+            let dayFour = moment().add(4, 'd').format('M/D/YYYY')
+            let dayFourTemp = fiveDay.list[29].main.todayTemp
+            let dayFourWind = fiveDay.list[29].wind.speed
+            let dayFourHumidity= fiveDay.list[29].main.humidity
+            let dayFourIconCode = fiveDay.list[29].weather[0].icon
             let dayFourIcon = 'https:openweathermap.org/img/w/' + dayFourIconCode + '.png'
 
-            let dayFive = moment().add(1, 'd').format('M/D/YYYY')
-            let dayFiveTemp = fiveDay.list[5].main.todayTemp
-            let dayFiveWind = fiveDay.list[5].main.humidity
-            let dayFiveIconCode = fiveDay.list[5].weather[0].icon
+            let dayFive = moment().add(5, 'd').format('M/D/YYYY')
+            let dayFiveTemp = fiveDay.list[37].main.temp
+            let dayFiveWind = fiveDay.list[37].wind.speed
+            let dayFiveHumidity = fiveDay.list[37].main.humidity
+            let dayFiveIconCode = fiveDay.list[37].weather[0].icon
             let dayFiveIcon = 'https:openweathermap.org/img/w/' + dayFiveIconCode + '.png'
 
-            let forecastDayOne = document.getElementById('d1')
+            let forecastDayOne = document.getElementById('d-1')
             let OneDayTemp = document.getElementById('t-1')
             let OneDayWind = document.getElementById('w-1')
             let OneDayHumidity = document.getElementById('h-1')
@@ -104,9 +112,9 @@ function SetWeather() {
             OneDayHumidity.textContent = dayOneHumidity
 
             let icon1 = document.getElementById('icon1')
-            icon1.setAttribute('src' , dayOneIcon)
+            icon1.setAttribute('src', dayOneIcon)
 
-            let forecastDayTwo = document.getElementById('d2')
+            let forecastDayTwo = document.getElementById('d-2')
             let TwoDayTemp = document.getElementById('t-2')
             let TwoDayWind = document.getElementById('w-2')
             let TwoDayHumidity = document.getElementById('h-2')
@@ -117,9 +125,9 @@ function SetWeather() {
             TwoDayHumidity.textContent = dayTwoHumidity
 
             let icon2 = document.getElementById('icon2')
-            icon2.setAttribute('src' , dayTwoIcon)
+            icon2.setAttribute('src', dayTwoIcon)
 
-            let forecastDayThree = document.getElementById('d3')
+            let forecastDayThree = document.getElementById('d-3')
             let ThreeDayTemp = document.getElementById('t-3')
             let ThreeDayWind = document.getElementById('w-3')
             let ThreeDayHumidity = document.getElementById('h-3')
@@ -130,9 +138,9 @@ function SetWeather() {
             ThreeDayHumidity.textContent = dayThreeHumidity
 
             let icon3 = document.getElementById('icon3')
-            icon3.setAttribute('src' , dayThreeIcon)
+            icon3.setAttribute('src', dayThreeIcon)
 
-            let forecastDayFour = document.getElementById('d4')
+            let forecastDayFour = document.getElementById('d-4')
             let FourDayTemp = document.getElementById('t-4')
             let FourDayWind = document.getElementById('w-4')
             let FourDayHumidity = document.getElementById('h-4')
@@ -143,9 +151,9 @@ function SetWeather() {
             FourDayHumidity.textContent = dayFourHumidity
 
             let icon4 = document.getElementById('icon4')
-            icon4.setAttribute('src' , dayFourIcon)
+            icon4.setAttribute('src', dayFourIcon)
 
-            let forecastDayFive = document.getElementById('d5')
+            let forecastDayFive = document.getElementById('d-5')
             let FiveDayTemp = document.getElementById('t-5')
             let FiveDayWind = document.getElementById('w-5')
             let FiveDayHumidity = document.getElementById('h-5')
@@ -156,11 +164,14 @@ function SetWeather() {
             FiveDayHumidity.textContent = dayFiveHumidity
 
             let icon5 = document.getElementById('icon5')
-            icon5.setAttribute('src' , dayFiveIcon)
+            icon5.setAttribute('src', dayFiveIcon)
         })
+    })
+}
 
         function onLoad() { 
-            let history = JSON.parse(localStorage.getItem(cities))
+
+            let history = JSON.parse(localStorage.getItem('cities'))
             if(history === null) {
                 history = []
                 localStorage.setItem('cities', JSON.stringify(history))
@@ -172,10 +183,11 @@ function SetWeather() {
 
         function displaySearches() {
             let history = JSON.parse(localStorage.getItem('cities'))
+            console.log(history)
 
-            let historyDiv = document.getElementById('pastSearches')
-            while(historyDiv.firstChild) {
-                historyDiv.removeChild(historyDiv.firstChild)
+            let historyDiv = document.getElementById('pastSearch')
+            while (historyDiv.firstChild) {
+                historyDiv.removeChild (historyDiv.firstChild)
             }
 
             for(let i=history.length-1; i>=0; i--) {
@@ -188,10 +200,9 @@ function SetWeather() {
 
                     sameDayURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + citySearch + 'appid=' + APIKey + '&units=imperial'
 
+                    console.log(citySearch)
+
                     SetWeather()
                 })
             }
         }
-    })
-
-}
