@@ -7,7 +7,7 @@ let searchButton = document.getElementById('searchButton')
 let sameDayURL = ''
 
 searchButton.addEventListener('click', function(){
-    citySearch = citySearchInput.value
+    citySearch = cityInput.value
 
     sameDayURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + citySearch + '&appid=' + APIKey + '&units=imperial'
 
@@ -24,7 +24,7 @@ searchButton.addEventListener('click', function(){
 function SetWeather() {
     fetch(sameDayURL)
     .then(function(response2) {
-        return response2.json
+        return response2.json()
     })
     .then(function(dailyWeather) {
 
@@ -67,28 +67,28 @@ function SetWeather() {
             console.log(fiveDay)
 
             let dayOne = moment().add(1, 'd').format('M/D/YYYY')
-            let dayOneTemp = fiveDay.list[5].main.todayTemp
+            let dayOneTemp = fiveDay.list[5].main.temp
             let dayOneWind = fiveDay.list[5].wind.speed
             let dayOneHumidity = fiveDay.list[5].main.humidity
             let dayOneIconCode = fiveDay.list[5].weather[0].icon
             let dayOneIcon = 'https:openweathermap.org/img/w/' + dayOneIconCode + '.png'
 
             let dayTwo = moment().add(2, 'd').format('M/D/YYYY')
-            let dayTwoTemp = fiveDay.list[13].main.todayTemp
+            let dayTwoTemp = fiveDay.list[13].main.temp
             let dayTwoWind = fiveDay.list[13].wind.speed
             let dayTwoHumidity = fiveDay.list[13].main.humidity
             let dayTwoIconCode = fiveDay.list[13].weather[0].icon
             let dayTwoIcon = 'https:openweathermap.org/img/w/' + dayTwoIconCode + '.png'
 
             let dayThree = moment().add(3, 'd').format('M/D/YYYY')
-            let dayThreeTemp = fiveDay.list[21].main.todayTemp
+            let dayThreeTemp = fiveDay.list[21].main.temp
             let dayThreeWind = fiveDay.list[21].wind.speed
             let dayThreeHumidity = fiveDay.list[21].main.humidity
             let dayThreeIconCode = fiveDay.list[21].weather[0].icon
             let dayThreeIcon = 'https:openweathermap.org/img/w/' + dayThreeIconCode + '.png'
 
             let dayFour = moment().add(4, 'd').format('M/D/YYYY')
-            let dayFourTemp = fiveDay.list[29].main.todayTemp
+            let dayFourTemp = fiveDay.list[29].main.temp
             let dayFourWind = fiveDay.list[29].wind.speed
             let dayFourHumidity= fiveDay.list[29].main.humidity
             let dayFourIconCode = fiveDay.list[29].weather[0].icon
