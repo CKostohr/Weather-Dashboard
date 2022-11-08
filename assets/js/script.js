@@ -1,9 +1,10 @@
-const APIKey = "90a5a0fd17c8d2e0dfa9c4cd8c6be0cd"
-const today = moment().format(M/D/YYYY)
+const APIKey = '90a5a0fd17c8d2e0dfa9c4cd8c6be0cd'
+let today = moment().format('M/D/YYYY')
 
 let citySearchInput = document.getElementById('cityInput')
 let citySearch = ''
 let searchButton = document.getElementById('searchButton')
+let sameDayURL = ''
 
 searchButton.addEventListener('click', function(){
     citySearch = citySearchInput.value
@@ -158,8 +159,38 @@ function SetWeather() {
             icon5.setAttribute('src' , dayFiveIcon)
         })
 
-        function onLoad() {
-            
+        function onLoad() { 
+            let history = JSON.parse(localStorage.getItem(cities))
+            if(history === null) {
+                history = []
+                localStorage.setItem('cities', JSON.stringify(history))
+            }else {
+            displaySearches()
+        }}
+
+        onLoad()
+
+        function displaySearches() {
+            let history = JSON.parse(localStorage.getItem('cities'))
+
+            let historyDiv = document.getElementById('pastSearches')
+            while(historyDiv.firstChild) {
+                historyDiv.removeChild(historyDiv.firstChild)
+            }
+
+            for(let i=history.length-1; i>=0; i--) {
+                let button = document.createElement('button')
+                button.innerHTML=history[i]
+                historyDiv.appendChild(button)
+
+                button.addEventListener('click', function(e) {
+                    citySearch=e.target.innerHTML
+
+                    sameDayURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + citySearch + 'appid=' + APIKey + '&units=imperial'
+
+                    SetWeather()
+                })
+            }
         }
     })
 
