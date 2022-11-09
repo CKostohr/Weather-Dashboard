@@ -22,4 +22,4 @@ Please refer to the LICENSE in the repo.
 
 ## Screen Shot
 
-![Alt text](../../../../../../C:/Users/Ckost/Desktop/BootCamp/Weather-Dashboard/assets/img/Dash.png)
+![Screenshot of my weather page](assets/img/Dash.png)
